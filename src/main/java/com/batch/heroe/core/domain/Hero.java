@@ -1,4 +1,4 @@
-package com.batch.model;
+package com.batch.heroe.core.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

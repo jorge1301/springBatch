@@ -1,4 +1,4 @@
-package com.batch.dto;
+package com.batch.heroe.adapters.api.dto;
 
 public record Heroes(
         Long id,

@@ -1,4 +1,4 @@
-package com.batch.job;
+package com.batch.heroe.core.execution;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -7,10 +7,10 @@ import java.util.List;
 
 @Getter
 @Component
-public class FileNames {
+public class ExecutionFileNames {
     private final List<String> fileNames;
 
-    public FileNames(List<String> fileNames) {
+    public ExecutionFileNames(List<String> fileNames) {
         this.fileNames = fileNames;
     }
 

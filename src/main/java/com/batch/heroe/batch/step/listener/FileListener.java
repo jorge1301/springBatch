@@ -1,6 +1,7 @@
-package com.batch.job;
+package com.batch.heroe.batch.step.listener;
 
-import com.batch.repository.HeroRepository;
+import com.batch.heroe.adapters.persistence.JpaHeroRepository;
+import com.batch.heroe.core.execution.ExecutionFileNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
@@ -16,28 +17,28 @@ import java.util.stream.Stream;
 @Slf4j
 public class FileListener implements JobExecutionListener {
     @Autowired
-    private HeroRepository heroRepository;
+    private JpaHeroRepository heroRepository;
 
     @Autowired
-    private FileNames fileNames;
+    private ExecutionFileNames executionFileNames;
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
         try {
             this.heroRepository.deleteAll();
-            this.fileNames.clearFileNames();
+            this.executionFileNames.clearFileNames();
             this.listFilesInResources();
 
         } catch (Exception e) {
-            log.error("Error to get fileNames", e);
+            log.error("Error to get executionFileNames", e);
         }
     }
 
     @Override
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-            this.fileNames.clearFileNames();
-            System.out.println("Job finalizado con éxito.");
+            this.executionFileNames.clearFileNames();
+            System.out.println("Job completed successfully.");
         }
     }
 
@@ -49,7 +50,7 @@ public class FileListener implements JobExecutionListener {
                 paths.filter(Files::isRegularFile)
                         .map(Path::getFileName)
                         .map(Path::toString)
-                        .forEach(x -> this.fileNames.addFileNames(x));
+                        .forEach(x -> this.executionFileNames.addFileNames(x));
             }
         }
     }
