@@ -1,7 +1,7 @@
-package com.batch.job;
+package com.batch.heroe.batch.step.processor;
 
-import com.batch.dto.Heroes;
-import com.batch.model.Hero;
+import com.batch.heroe.adapters.api.dto.Heroes;
+import com.batch.heroe.core.domain.Hero;
 import org.springframework.batch.item.ItemProcessor;
 
 public class HeroProcessor implements ItemProcessor<Heroes, Hero> {

@@ -1,6 +1,6 @@
-package com.batch.job.partition;
+package com.batch.heroe.batch.config;
 
-import com.batch.job.FileNames;
+import com.batch.heroe.core.execution.ExecutionFileNames;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -17,12 +17,12 @@ import java.util.Map;
 public class FilePartition implements Partitioner {
 
     @Autowired
-    FileNames fileNames;
+    ExecutionFileNames executionFileNames;
 
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {
         Map<String, ExecutionContext> result = new HashMap<>();
-        for (String fileName : this.fileNames.getFileNames()) {
+        for (String fileName : this.executionFileNames.getFileNames()) {
             int totalLines = countRecords(fileName);
             int partitionSize = totalLines / gridSize;
             int start = 1;
